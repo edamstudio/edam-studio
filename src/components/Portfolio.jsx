@@ -9,10 +9,7 @@ import snap2 from "../assets/images/portfolio/snap-2.jpg";
 import profile1 from "../assets/images/portfolio/profile-1.jpg";
 import profile2 from "../assets/images/portfolio/profile-2.jpg";
 
-import film1 from "../assets/videos/film-1.mp4";
-import film2 from "../assets/videos/film-2.mp4";
-
-const categories = ["ALL", "WEDDING", "STUDIO", "SNAP", "FILM", "PROFILE"];
+const categories = ["ALL", "WEDDING", "STUDIO", "SNAP", "PROFILE"];
 
 const portfolioItems = [
   {
@@ -59,27 +56,13 @@ const portfolioItems = [
   },
   {
     id: 7,
-    category: "FILM",
-    type: "video",
-    src: film1,
-    title: "Film Story 01",
-  },
-  {
-    id: 8,
-    category: "FILM",
-    type: "video",
-    src: film2,
-    title: "Film Story 02",
-  },
-  {
-    id: 9,
     category: "PROFILE",
     type: "image",
     src: profile1,
     title: "Profile Portrait 01",
   },
   {
-    id: 10,
+    id: 8,
     category: "PROFILE",
     type: "image",
     src: profile2,
@@ -109,7 +92,6 @@ export default function Portfolio() {
 
   const showPrev = () => {
     if (!filteredItems.length) return;
-
     setSelectedIndex((prev) =>
       prev === 0 ? filteredItems.length - 1 : prev - 1
     );
@@ -117,19 +99,13 @@ export default function Portfolio() {
 
   const showNext = () => {
     if (!filteredItems.length) return;
-
     setSelectedIndex((prev) =>
       prev === filteredItems.length - 1 ? 0 : prev + 1
     );
   };
 
   useEffect(() => {
-    if (selectedIndex !== null) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "auto";
-    }
-
+    document.body.style.overflow = selectedIndex !== null ? "hidden" : "auto";
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -138,7 +114,6 @@ export default function Portfolio() {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (selectedIndex === null) return;
-
       if (e.key === "Escape") closeLightbox();
       if (e.key === "ArrowLeft") showPrev();
       if (e.key === "ArrowRight") showNext();
@@ -167,7 +142,7 @@ export default function Portfolio() {
               당신의 이야기를 담아드립니다
             </h2>
             <p className="mx-auto max-w-2xl text-sm leading-7 text-[#6f665e] md:text-base">
-              웨딩, 스튜디오, 스냅, 필름, 프로필까지
+              웨딩, 스튜디오, 스냅, 프로필까지
               이담 스튜디오는 가장 자연스럽고 오래 남는 순간을 기록합니다.
             </p>
           </div>
@@ -202,29 +177,11 @@ export default function Portfolio() {
                 className="group relative overflow-hidden bg-white text-left"
               >
                 <div className="relative aspect-[4/5] overflow-hidden">
-                  {item.type === "image" ? (
-                    <img
-                      src={item.src}
-                      alt={item.title}
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                    />
-                  ) : (
-                    <>
-                      <video
-                        src={item.src}
-                        className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                        autoPlay
-                        muted
-                        loop
-                        playsInline
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center">
-                        <div className="flex h-14 w-14 items-center justify-center rounded-full border border-white/60 bg-black/25 backdrop-blur-sm transition duration-300 group-hover:scale-110">
-                          <span className="ml-1 text-xl text-white">▶</span>
-                        </div>
-                      </div>
-                    </>
-                  )}
+                  <img
+                    src={item.src}
+                    alt={item.title}
+                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                  />
                 </div>
 
                 <div className="absolute inset-0 bg-black/0 transition duration-300 group-hover:bg-black/20" />
@@ -271,20 +228,11 @@ export default function Portfolio() {
             className="relative max-h-full w-full max-w-5xl"
             onClick={(e) => e.stopPropagation()}
           >
-            {selectedItem.type === "image" ? (
-              <img
-                src={selectedItem.src}
-                alt={selectedItem.title}
-                className="max-h-[80vh] w-full object-contain"
-              />
-            ) : (
-              <video
-                src={selectedItem.src}
-                controls
-                autoPlay
-                className="max-h-[80vh] w-full object-contain"
-              />
-            )}
+            <img
+              src={selectedItem.src}
+              alt={selectedItem.title}
+              className="max-h-[80vh] w-full object-contain"
+            />
 
             <div className="mt-4 text-center text-white">
               <p className="mb-2 text-[11px] uppercase tracking-[0.35em] text-white/70">
